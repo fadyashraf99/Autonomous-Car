@@ -10,8 +10,8 @@
 uint8_t sensor_working = 0;
 uint8_t rising_edge = 0;
 uint32_t timer_counter = 0;
-int distance;
-char distance_str[10];
+uint32_t distance;
+uint8_t distance_str[10];
 
 void ultrasonic_init(void) {		//initialize ultrasonic
 
@@ -47,7 +47,7 @@ ISR(INT0_vect) {
 			rising_edge = 1;
 			timer_counter = 0;
 		} else {
-			distance = (timer_counter * 256 + TCNT0) / 466;
+			distance = (timer_counter * 256 + TCNT0) / (466*2);
 			lcd_goto_xy(1, 0);
 			itoa(distance, distance_str, 10);
 			strcat(distance_str, " cm ");
