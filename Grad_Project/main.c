@@ -35,59 +35,42 @@ int main() {
 		forward();
 		_delay_ms(100);
 
-		if (distance <= 20) {
-			lcd_clear();
-			lcd_write_word("obstacle detected");
-			_delay_ms(10);
+		if (distance <= 30) {
 			stop();
+			_delay_ms(100);
 			servo_write(45);		//look left
-			_delay_ms(1000);
-			lcd_clear();
+			_delay_ms(500);
 			ultra_triger();
-			if (distance <= 20) {
-				lcd_clear();
-				lcd_write_word("obstacle detected");
-				_delay_ms(10);
+			_delay_ms(500);
+			if (distance <= 30) {
 				servo_write(135);	//look right
-				_delay_ms(1000);
-				lcd_clear();
+				_delay_ms(500);
 				ultra_triger();
-				if (distance <= 20) {
-					lcd_clear();
-					lcd_write_word("obstacle detected");
-					_delay_ms(10);
+				_delay_ms(500);
+				if (distance <= 30) {
+					servo_write(90);
+					_delay_ms(100);
 					backward();
 					_delay_ms(1000);
 					right();
-					_delay_ms(500);
+					_delay_ms(250);
 					stop();
-					_delay_ms(500);
-					lcd_clear();
-					servo_write(90);
-					ultra_triger();
+					_delay_ms(1000);
 				} else {
-					lcd_clear();
-					lcd_write_word("no obstacle detected");
-					_delay_ms(10);
 					left();
-					_delay_ms(500);
-					lcd_clear();
+					_delay_ms(250);
+					stop();
 					servo_write(90);
+					_delay_ms(1000);
 				}
 			} else {
-				lcd_clear();
-				lcd_write_word("no obstacle detected");
-				_delay_ms(10);
 				right();
-				_delay_ms(500);
-				lcd_clear();
+				_delay_ms(250);
+				stop();
 				servo_write(90);
+				_delay_ms(1000);
 			}
 		}
-		lcd_clear();
-		lcd_write_word("no obstacle detected");
-		_delay_ms(100);
-		lcd_clear();
 	}
 	return 0;
 }
